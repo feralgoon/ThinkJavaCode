@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
-public class Echo {
+public class Echo
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         String line;
         Scanner in = new Scanner(System.in);
 
