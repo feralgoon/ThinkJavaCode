@@ -35,7 +35,6 @@ public class CoffeDiscounts
     private static void findDiscounts(int commute, int busOrBike)
     {
         String result = "You get-----> ";
-        int discount;
 
         if (commute < 21)
             result += "a free coffee: ";
