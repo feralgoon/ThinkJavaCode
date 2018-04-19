@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class CheeseOrder
 {
+
     public static void main(String[] args)
     {
         printHeader();
