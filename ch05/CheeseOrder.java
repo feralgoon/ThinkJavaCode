@@ -5,47 +5,7 @@ public class CheeseOrder
     public static void main(String[] args)
     {
         printHeader();
-        promptUser();
-
-
-        //This code moved to its own method, in order to utilize
-        //recursion in case of invalid entry for diameter or yards.
-
-        /*final int PRICE_ONE_INCH   = 2;
-        final int PRICE_TWO_INCH   = 4;
-        final int PRICE_THREE_INCH = 6;
-
-        int diameter;
-        int yards;
-
-        Scanner in = new Scanner(System.in);
-
-        printHeader();
-
-        System.out.print("What diameter cheese would you like to order? ---> ");
-        diameter = in.nextInt();
-        in.nextLine();
-
-        if ((diameter > 3) || (diameter < 1))
-            System.out.println("Diameter is too crazy!");
-        else
-        {
-            System.out.print("How many yards would you like to order?       ---> ");
-            yards = in.nextInt();
-            in.nextLine();
-
-            if(yards < 0)
-                System.out.println("Can't order that few yards!");
-            else
-            {
-                if (diameter == 1)
-                    getCost(diameter, yards, PRICE_ONE_INCH);
-                else if (diameter == 2)
-                    getCost(diameter, yards, PRICE_TWO_INCH);
-                else
-                    getCost(diameter, yards, PRICE_THREE_INCH);
-            }
-        }*/
+        startOrder();
     }
 
     private static void printHeader()
@@ -64,7 +24,7 @@ public class CheeseOrder
         System.out.println();
     }
 
-    private static void getCost(int diameter, int yards, int price)
+    private static void getCost(int diameter, int yards, int price, int shipping)
     {
         int cost;
 
@@ -76,7 +36,7 @@ public class CheeseOrder
             }
             else
             {
-                cost = (price * yards) + (yards * 2);
+                cost = (price * yards) + (yards * shipping);
             }
         }
         else if (diameter == 2)
@@ -84,14 +44,14 @@ public class CheeseOrder
             if (yards > 75)
                 cost = price * yards;
             else
-                cost = (price * yards) + (yards * 2);
+                cost = (price * yards) + (yards * shipping);
         }
         else
         {
             if (yards > 25)
                 cost = price * yards;
             else
-                cost = (price * yards) + (yards * 2);
+                cost = (price * yards) + (yards * shipping);
         }
 
         cost += 5;
@@ -100,14 +60,9 @@ public class CheeseOrder
         System.out.println("The total price for the order is: $" + cost);
     }
 
-    private static void promptUser()
+    private static void startOrder()
     {
-        final int PRICE_ONE_INCH   = 2;
-        final int PRICE_TWO_INCH   = 4;
-        final int PRICE_THREE_INCH = 6;
-
         int diameter;
-        int yards;
 
         Scanner in = new Scanner(System.in);
 
@@ -119,29 +74,43 @@ public class CheeseOrder
         {
             System.out.println("Diameter is too crazy!");
             System.out.println();
-            promptUser();
+            startOrder();
+        }
+        else
+            finishOrder(diameter);
+    }
+
+    private static void finishOrder(int diameter)
+    {
+        final int PRICE_ONE_INCH   = 2;
+        final int PRICE_TWO_INCH   = 4;
+        final int PRICE_THREE_INCH = 6;
+        final int SHIP_ONE_INCH    = 2;
+        final int SHIP_TWO_INCH    = 2;
+        final int SHIP_THREE_INCH  = 4;
+
+        int yards;
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("How many yards would you like to order?       ---> ");
+        yards = in.nextInt();
+        in.nextLine();
+
+        if(yards <= 0)
+        {
+            System.out.println("Can't order that few yards!");
+            System.out.println();
+            finishOrder(diameter);
         }
         else
         {
-            System.out.print("How many yards would you like to order?       ---> ");
-            yards = in.nextInt();
-            in.nextLine();
-
-            if(yards <= 0)
-            {
-                System.out.println("Can't order that few yards!");
-                System.out.println();
-                promptUser();
-            }
+            if (diameter == 1)
+                getCost(diameter, yards, PRICE_ONE_INCH, SHIP_ONE_INCH);
+            else if (diameter == 2)
+                getCost(diameter, yards, PRICE_TWO_INCH, SHIP_TWO_INCH);
             else
-            {
-                if (diameter == 1)
-                    getCost(diameter, yards, PRICE_ONE_INCH);
-                else if (diameter == 2)
-                    getCost(diameter, yards, PRICE_TWO_INCH);
-                else
-                    getCost(diameter, yards, PRICE_THREE_INCH);
-            }
+                getCost(diameter, yards, PRICE_THREE_INCH, SHIP_THREE_INCH);
         }
     }
 }
