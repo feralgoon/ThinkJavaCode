@@ -6,7 +6,7 @@ public class SevenG
     {
         multTable(5);
         System.out.println();
-        multTable(59);
+        multTable(125);
 
     }
 
@@ -29,11 +29,11 @@ public class SevenG
         while (spaceCount < header.length())
         {
             if (header.charAt(spaceCount) == '\t')
-                spacer += "-----";
+                spacer += "----";
             spaceCount++;
         }
 
-        System.out.println(header);
+        System.out.println(header + "\t\t|");
         System.out.println(spacer);
 
         while (outerCount <= max)
