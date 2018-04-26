@@ -57,7 +57,14 @@ public class VendingSoftware
                 }
             }
 
+            if (keepGoing)
+            {
+                printSales(items, sales, -1);
+            }
+
         } while (keepGoing);
+
+        printFinalSales(items, sales);
 
     }
 
@@ -85,15 +92,18 @@ public class VendingSoftware
 
     private static void printSales(String[] items, int[] sold, int selection)
     {
-        sold[selection]++;
 
         System.out.println();
         if (selection == -1)
         {
             System.out.println("Thank you for choosing multiple items!");
         }
+        else if (selection != 0 && selection != 1 && selection != 2)
+        {
+        }
         else
         {
+            sold[selection]++;
             System.out.println("Thank you for choosing " + items[selection]);
         }
         System.out.println("Sold so far: ");
@@ -103,26 +113,13 @@ public class VendingSoftware
         }
     }
 
-    private static int[] convertToArray(int num)
-    {
-        String numValue = num + "";
-        int[] result = new int[numValue.length()];
-
-        for (int i = 0; i < numValue.length(); i++)
-        {
-            result[i] = numValue.charAt(i);
-        }
-
-        return result;
-    }
-
     private static int[] convertToArray(String str)
     {
         int[] result = new int[str.length()];
 
         for (int i = 0; i < str.length(); i++)
         {
-            result[i] = str.charAt(i);
+            result[i] = Character.getNumericValue(str.charAt(i));
         }
 
         return result;
