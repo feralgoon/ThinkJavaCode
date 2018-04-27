@@ -1,5 +1,3 @@
-import java.util.Collections;
-
 public class StringUtil
 {
     public static void main(String[] args)
@@ -26,6 +24,7 @@ public class StringUtil
 
         printPhoneNumber("234-666-8888");
         printPhoneNumber("5015550100");
+        printPhoneNumber("555JKL21A1");
 
         System.out.println("findFirstE for 'Hello' is " + findFirstE("Hello"));
         System.out.println("findFirstE for 'Goodbye' is " + findFirstE("Goodbye"));
@@ -102,7 +101,6 @@ public class StringUtil
     {
         boolean result = true;
         int[] counts = new int[words.length];
-        int countIndex = 0;
 
         for (int i = 0; i < counts.length; i++)
         {
@@ -263,8 +261,67 @@ public class StringUtil
         return result;
     }
 
+    private static String convertPhoneNumbers(String s)
+    {
+        String result = "";
+
+        for(int i = 0; i < s.length(); i++)
+        {
+           switch (s.charAt(i))
+           {
+               case 'A' : case 'B' : case 'C' :
+                   result += "2";
+                   break;
+
+               case 'D' : case 'E' : case 'F' :
+                   result += "3";
+                   break;
+
+               case 'G' : case 'H' : case 'I' :
+                   result += "4";
+                   break;
+
+               case 'J' : case 'K' : case 'L' :
+                   result += "5";
+                   break;
+
+               case 'M' : case 'N' : case 'O' :
+                   result += "6";
+                   break;
+
+               case 'P' : case 'Q' : case 'R' : case 'S' :
+                   result += "7";
+                   break;
+
+               case 'T' : case 'U' : case 'V' :
+                   result += "8";
+                   break;
+
+               case 'W' : case 'X' : case 'Y' : case 'Z' :
+                   result += "9";
+                   break;
+
+               default :
+                   if (s.charAt(i) != '-')
+                   {
+                       result += s.charAt(i);
+                   }
+                   break;
+           }
+        }
+
+        return result;
+    }
+
     private static void printPhoneNumber(String s)
     {
+        String number = convertPhoneNumbers(s);
+
+        System.out.println("Area Code: " + number.substring(0, 3) +
+                "\tExchange: " + number.substring(3, 6) +
+                "\tLine Number: " + number.substring(6));
+
+/*
         if (s.length() == 10)
         {
             System.out.println("Area Code: " + s.substring(0, 3) +
@@ -275,7 +332,7 @@ public class StringUtil
             System.out.println("Area Code: " + s.substring(0, 3) +
                     "\tExchange: " + s.substring(4, 7) +
                     "\tLine Number: " + s.substring(8));
-        }
+        }*/
     }
 
     private static void printCharacters(String s)
