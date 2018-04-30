@@ -41,7 +41,14 @@ public class Date
             formattedDate += month + "-";
         }
 
-        formattedDate += day;
+        if (day < 10)
+        {
+            formattedDate += "0" + day;
+        }
+        else
+        {
+            formattedDate += day;
+        }
 
         return formattedDate;
     }
