@@ -13,13 +13,14 @@ public class Board
         this.pegTwo = pegTwo;
         this.dieOne = dieOne;
         this.dieTwo = dieTwo;
-
-        showBoard();
     }
 
     public void playGame()
     {
-        while (pegOne.getPosition() != 10 && pegTwo.getPosition() != 10)
+        System.out.println("Starting Game");
+        System.out.println();
+
+        while (!pegOne.hasWon() && !pegTwo.hasWon())
         {
             showBoard();
             nextTurn();
@@ -35,11 +36,11 @@ public class Board
         dieTwo.roll();
 
         System.out.println();
-        System.out.println("Turn starting for peg one. ");
-        System.out.println("Dice for peg one are " + dieOne.getValue() + " and " + dieTwo.getValue());
+        System.out.println("Turn starting for peg " + pegOne.getName());
+        System.out.println("Dice for peg " + pegOne.getName() + " are " + dieOne.getValue() + " and " + dieTwo.getValue());
 
-        if (dieOne.getValue() == pegOne.getPosition() + 1 || dieTwo.getValue() == pegOne.getPosition() + 1 ||
-                dieOne.getValue() + dieTwo.getValue() == pegOne.getPosition() + 1)
+        if (dieOne.getValue() == pegOne.getNextPosition() || dieTwo.getValue() == pegOne.getNextPosition() ||
+                dieOne.getValue() + dieTwo.getValue() == pegOne.getNextPosition())
         {
             pegOne.move();
         }
@@ -47,14 +48,14 @@ public class Board
         dieOne.roll();
         dieTwo.roll();
 
-        if (pegOne.getPosition() != 10)
+        if (!pegOne.hasWon())
         {
             System.out.println();
-            System.out.println("Turn starting for peg two. ");
-            System.out.println("Dice for peg two are " + dieOne.getValue() + " and " + dieTwo.getValue());
+            System.out.println("Turn starting for peg " + pegTwo.getName());
+            System.out.println("Dice for peg " + pegTwo.getName() + " are " + dieOne.getValue() + " and " + dieTwo.getValue());
 
-            if (dieOne.getValue() == pegTwo.getPosition() + 1 || dieTwo.getValue() == pegTwo.getPosition() + 1 ||
-                    dieOne.getValue() + dieTwo.getValue() == pegTwo.getPosition() + 1)
+            if (dieOne.getValue() == pegTwo.getNextPosition() || dieTwo.getValue() == pegTwo.getNextPosition() ||
+                    dieOne.getValue() + dieTwo.getValue() == pegTwo.getNextPosition())
             {
                 pegTwo.move();
             }
@@ -66,8 +67,8 @@ public class Board
     private void showBoard()
     {
         System.out.println();
-        System.out.println("Peg one is at position " + pegOne.getPosition());
-        System.out.println("Peg two is at position " + pegTwo.getPosition());
+        System.out.println("Peg " + pegOne.getName() + " is at position " + pegOne.getPosition());
+        System.out.println("Peg " + pegTwo.getName() + " is at position " + pegTwo.getPosition());
     }
 
     private void endGame()
@@ -75,5 +76,22 @@ public class Board
         System.out.println();
         System.out.println("Game over!");
         showBoard();
+        System.out.println();
+
+        if (pegOne.hasWon())
+        {
+            System.out.println(pegOne.getName() + " has won!");
+        }
+        else
+        {
+            System.out.println(pegTwo.getName() + " has won!");
+
+        }
+    }
+
+    public void reset()
+    {
+        pegOne.reset();
+        pegTwo.reset();
     }
 }
