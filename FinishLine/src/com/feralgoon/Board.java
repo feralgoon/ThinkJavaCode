@@ -35,8 +35,8 @@ public class Board
         dieTwo.roll();
 
         System.out.println();
-        System.out.println("Turn starting for pegOne. ");
-        System.out.println("Dice for pegOne are " + dieOne.getValue() + " and " + dieTwo.getValue());
+        System.out.println("Turn starting for peg one. ");
+        System.out.println("Dice for peg one are " + dieOne.getValue() + " and " + dieTwo.getValue());
 
         if (dieOne.getValue() == pegOne.getPosition() + 1 || dieTwo.getValue() == pegOne.getPosition() + 1 ||
                 dieOne.getValue() + dieTwo.getValue() == pegOne.getPosition() + 1)
@@ -47,13 +47,17 @@ public class Board
         dieOne.roll();
         dieTwo.roll();
 
-        if (dieOne.getValue() == pegTwo.getPosition() + 1 || dieTwo.getValue() == pegTwo.getPosition() + 1 ||
-                dieOne.getValue() + dieTwo.getValue() == pegTwo.getPosition() + 1)
+        if (pegOne.getPosition() != 10)
         {
             System.out.println();
-            System.out.println("Turn starting for pegTwo. ");
-            System.out.println("Dice for pegTwo are " + dieOne.getValue() + " and " + dieTwo.getValue());
-            pegTwo.move();
+            System.out.println("Turn starting for peg two. ");
+            System.out.println("Dice for peg two are " + dieOne.getValue() + " and " + dieTwo.getValue());
+
+            if (dieOne.getValue() == pegTwo.getPosition() + 1 || dieTwo.getValue() == pegTwo.getPosition() + 1 ||
+                    dieOne.getValue() + dieTwo.getValue() == pegTwo.getPosition() + 1)
+            {
+                pegTwo.move();
+            }
         }
 
 
