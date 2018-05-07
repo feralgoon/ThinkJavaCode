@@ -123,8 +123,8 @@ public class BingoNumbers
         else
         {
             System.out.println("Congratulations, you win an fruit cake!");
+            bingoNums.clear();
         }
-        bingoNums.clear();
 
     }
 
