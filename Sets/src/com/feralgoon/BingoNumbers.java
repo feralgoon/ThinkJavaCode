@@ -8,7 +8,7 @@ import java.util.Set;
 public class BingoNumbers
 {
     private String[] choices;
-    Set<Integer> bingoNums = new HashSet<>(75);
+    private Set<Integer> bingoNums = new HashSet<>(75);
 
     private void run()
     {
@@ -193,13 +193,21 @@ public class BingoNumbers
             Random randNum = new Random();
             int randomNumber = randNum.nextInt(74) + 1;
 
-            while(bingoNums.contains(randomNumber))
+            if (bingoNums.size() == 74)
             {
-                randomNumber = randNum.nextInt(74) + 1;
+                System.out.println("All numbers have been called!");
             }
+            else
+            {
+                while(bingoNums.contains(randomNumber))
+                {
+                    randomNumber = randNum.nextInt(74) + 1;
 
-            bingoNums.add(randomNumber);
-            System.out.println("Called " + appendLetter(randomNumber));
+                }
+
+                bingoNums.add(randomNumber);
+                System.out.println("Called " + appendLetter(randomNumber));
+            }
         }
         else
         {
